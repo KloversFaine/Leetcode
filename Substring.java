@@ -22,3 +22,23 @@ class Solution {
         return result;    
     }
 }
+// solution 2 
+// a faster version considering the diff of a 'Char'
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int left = 0 , right = -1 , result = 0;
+        int n = s.length();
+        int[] substring = new int [256];
+        while(left < n){
+            if (right + 1 < n && substring[s.charAt(right + 1)] == 0){
+                right++;
+                substring[s.charAt(right)] = 1;
+            }else{
+                substring[s.charAt(left)] = 0;
+                left++;
+            }
+            result = Math.max(result , right - left + 1);
+        }
+        return result;
+    }
+}
