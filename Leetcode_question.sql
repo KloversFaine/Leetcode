@@ -20,3 +20,25 @@ SET M = N-1;
       LIMIT M,1
   );
 END
+
+#sql query 178
+select Score , 
+(
+select Count(*)
+From(
+    select distinct Score s 
+    from Scores
+    )AS tmp
+    where s >= Score 
+)AS Rank
+From Scores
+ORDER BY Score DESC
+
+#sql query 180
+#make use of SQL join to achieve the goal
+select distinct l1.Num ConsecutiveNums 
+from Logs l1
+left join Logs l2 on l1.Id = l2.Id - 1 
+left join Logs l3 on l2.Id = l3.Id - 1
+Where l1.Num = l2.Num and l2.Num = l3.Num
+
