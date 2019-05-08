@@ -99,3 +99,27 @@ where 3 > (select count(distinct(E2.Salary)) from Employee E2
            where E1.DepartmentId = E2.DepartmentId and E2.Salary > E1.Salary
           )
 Order by DepartmentId ASC 
+                        
+#sql query 196
+delete p1 from Person p1 inner join Person p2
+where p1.Email = p2.Email and p1.Id > p2.Id
+                        
+#sql query 197
+(A not good answer --> only faster than 9% around by using SUBDATE)                       
+select w1.Id from Weather w1, Weather w2
+where SUBDATE(w1.RecordDate , 1) = w2.RecordDate and w1.Temperature > w2.Temperature                        
+(Another answer --> a better method with a result of over 73% around by using TO_DAYS)
+select w1.Id from Weather w1, Weather w2
+where TO_DAYS(w1.RecordDate) = TO_DAYS(w2.RecordDate)+ 1 and w1.Temperature > w2.Temperature
+(Another answer --> a method with a result of over 56% around using DATEDIFF)
+select w1.Id from Weather w1, Weather w2
+where DATEDIFF(w1.RecordDate,w2.RecordDate) = 1 and w1.Temperature > w2.Temperature
+ 
+#sql query 262
+(the usage of count(*) is the same as sum(1),but count(*) is more efficient)
+select t.Request_at Day, ROUND(sum((case when t.Status like 'cancelled%' then 1 else 0 end))/count(*),2) AS 'Cancellation Rate'
+from Trips t
+inner join Users u on u.Users_Id = t.Client_Id and u.Banned = 'No'
+ 
+
+where t.Request_at between '2013-10-01' and '2013-10-03' group by t.Request_at
