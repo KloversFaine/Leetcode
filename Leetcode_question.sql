@@ -131,3 +131,17 @@ where area > 3000000 OR population > 25000000
 select class from courses 
 group by class
 having count(distinct student) >= 5
+ 
+#sql query 601 
+select distinct s1.*
+from stadium s1, stadium s2, stadium s3
+where s1.people >= 100 and s2.people >= 100 and s3.people >= 100
+and 
+(
+    (s1.id + 1 = s2.id and s2.id + 1 = s3.id)
+    OR
+    (s1.id - 1 = s2.id and s2.id - 1 = s3.id)
+    OR
+    (s1.id + 1 = s2.id and s1.id - 1 = s3.id)
+)
+order by s1.id
