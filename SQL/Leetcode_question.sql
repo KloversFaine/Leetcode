@@ -145,3 +145,10 @@ and
     (s1.id + 1 = s2.id and s1.id - 1 = s3.id)
 )
 order by s1.id
+
+#sql query 620
+ (description <> equals to description !=)
+select * 
+from cinema
+where description != 'boring' and  MOD(id, 2) = 1 
+order by rating desc;
