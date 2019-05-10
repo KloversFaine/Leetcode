@@ -156,3 +156,11 @@ order by rating desc;
 #sql query 626
 select if(id < (select count(*) from seat), if(id mod 2=0, id-1, id+1), if(id mod 2=0, id-1, id))  as id, student
 from seat order by id asc
+
+#sql query 626
+(using CASE WHEN)                                                                        
+update salary
+set sex = (CASE WHEN sex = 'm' THEN 'f' ELSE 'm' END)
+(using if function)
+update salary
+set sex = if(sex = 'm','f','m')                                                                           
